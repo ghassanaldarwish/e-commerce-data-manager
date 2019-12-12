@@ -1,0 +1,97 @@
+{
+    "name": "e-commerce-data-manager",
+    "version": "0.1.0",
+    "private": true,
+    "author": "Ghassan Aldarwish",
+    "license": "MIT",
+    "dependencies": {
+        "@material-ui/core": "^4.7.2",
+        "@material-ui/icons": "^4.5.1",
+        "@material-ui/styles": "^4.7.1",
+        "@types/classnames": "^2.2.9",
+        "@types/jest": "^24.0.23",
+        "@types/node": "^12.12.11",
+        "@types/react": "^16.9.11",
+        "@types/react-dom": "^16.9.4",
+        "@types/react-loadable": "^5.5.2",
+        "@types/react-redux": "^7.1.5",
+        "@types/react-router-dom": "^5.1.2",
+        "@types/recompose": "^0.30.7",
+        "@types/redux": "^3.6.0",
+        "@types/uuid": "^3.4.6",
+        "axios": "^0.19.0",
+        "classnames": "^2.2.6",
+        "data-generator-retail": "^3.0.0",
+        "express": "^4.17.1",
+        "fakerest": "^2.1.0",
+        "jquery": "^3.4.1",
+        "jwt-decode": "^2.2.0",
+        "lint-staged": "^9.4.3",
+        "pretty-quick": "^2.0.1",
+        "prop-types": "^15.7.2",
+        "proxy-polyfill": "^0.3.0",
+        "ra-core": "^3.0.4",
+        "ra-data-json-server": "^3.0.3",
+        "ra-data-simple-rest": "^3.0.3",
+        "ra-i18n-polyglot": "^3.0.4",
+        "ra-input-rich-text": "^3.0.1",
+        "ra-language-english": "^3.0.0",
+        "ra-language-french": "^3.0.0",
+        "react": "^16.10.2",
+        "react-admin": "^3.0.3",
+        "react-app-polyfill": "^1.0.5",
+        "react-dom": "^16.10.2",
+        "react-loadable": "^5.5.0",
+        "react-quill": "^1.3.3",
+        "react-redux": "^7.1.3",
+        "react-router-dom": "^5.1.2",
+        "react-scripts": "3.2.0",
+        "react-scroll": "^1.7.14",
+        "recompose": "^0.30.0",
+        "redux": "^4.0.4",
+        "redux-saga": "^1.1.3",
+        "slugify": "^1.3.6",
+        "typescript": "^3.7.2",
+        "uuid": "^3.3.3"
+    },
+    "scripts": {
+        "clean": "rm -rf node_modules && yarn install && yarn start",
+        "server": "yarn build && node server.js",
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "lint": "tsc --noEmit && eslint '*.{js,ts,tsx,jsx}' --quiet --fix"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.8.0",
+        "@typescript-eslint/parser": "^2.8.0",
+        "eslint": "^6.6.0",
+        "eslint-config-prettier": "^6.7.0",
+        "eslint-plugin-prettier": "^3.1.1",
+        "eslint-plugin-react": "^7.16.0",
+        "husky": "^3.1.0",
+        "prettier": "^1.19.1",
+        "source-map-explorer": "^2.1.2"
+    }
+}
