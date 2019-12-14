@@ -6,7 +6,7 @@ import getSidebarNavItems from '../data/sidebar-nav-items';
 
 const _store = {
     menuVisible: false,
-    navItems: getSidebarNavItems(),
+    navItems: getSidebarNavItems().getNavItems(),
 };
 
 class Store extends EventEmitter {
