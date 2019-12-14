@@ -3,7 +3,7 @@ export default function() {
         {
             title: 'Blog Dashboard',
             to: '/blog-overview',
-            htmlBefore: '<i class="material-icons">edit</i>',
+            htmlBefore: '<i class="material-icons">dashboard</i>',
             htmlAfter: '',
         },
         {

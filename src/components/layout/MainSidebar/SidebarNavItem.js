@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink as RouteNavLink } from 'react-router-dom';
 import { NavItem, NavLink } from 'shards-react';
+import './MainSidebar.css';
 class SidebarNavItem extends React.Component {
     state = {
         modal: false,
@@ -12,7 +13,7 @@ class SidebarNavItem extends React.Component {
             <NavLink tag={RouteNavLink} to={item.to ? item.to : null}>
                 {item.htmlBefore && (
                     <div
-                        className="d-inline-block item-icon-wrapper"
+                        className="d-inline-block item-icon-wrapper IconWraper"
                         dangerouslySetInnerHTML={{ __html: item.htmlBefore }}
                     />
                 )}
