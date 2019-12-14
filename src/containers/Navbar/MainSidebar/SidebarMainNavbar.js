@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, NavbarBrand } from 'shards-react';
-import logo from '../../images/shards-dashboards-logo.svg';
-import { Dispatcher, Constants } from '../../flux';
+import logo from '../../../images/shards-dashboards-logo.svg';
+import { Dispatcher, Constants } from '../../../flux';
 
 class SidebarMainNavbar extends React.Component {
     constructor(props) {

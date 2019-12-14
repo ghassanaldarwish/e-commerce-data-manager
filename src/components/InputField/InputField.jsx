@@ -1,5 +1,15 @@
 import React from 'react';
-import { FormGroup, Label, Input, FormFeedback, FormText } from 'reactstrap';
+import {
+    FormGroup,
+    Label,
+    Input,
+    FormFeedback,
+    FormText,
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+} from 'reactstrap';
 import './InputField.css';
 const InputField = props => {
     const {
@@ -14,11 +24,26 @@ const InputField = props => {
         onChangeField,
         value,
         onChangeCheckbox,
+        isDropdownOpen,
+        dropdownToggle,
+        options,
     } = props;
 
     let element = null;
 
     switch (inputElement) {
+        case 'dropdown':
+            element = (
+                <Dropdown isOpen={true} toggle={() => true}>
+                    <DropdownToggle caret>{title}</DropdownToggle>
+                    <DropdownMenu>
+                        {options.map((option, i) => (
+                            <DropdownItem key={i}>{option.title}</DropdownItem>
+                        ))}
+                    </DropdownMenu>
+                </Dropdown>
+            );
+            break;
         case 'input':
             element = (
                 <FormGroup>

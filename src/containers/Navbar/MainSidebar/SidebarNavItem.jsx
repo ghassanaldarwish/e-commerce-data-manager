@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { NavLink as RouteNavLink } from 'react-router-dom';
 import { NavItem, NavLink } from 'shards-react';
 import './MainSidebar.css';
-import MainSidebarServices from './MainSidebar.services';
+import CollapseModal from '../../../components/CollapseModal/CollapseModal';
+
+import { Type } from '../Navbar.enum';
 const SidebarNavItem = ({ item, renderModal }) => {
-    const { getNavItems } = MainSidebarServices();
     const [modal, setModal] = useState(false);
 
     const renderNavLink = item => {
         return (
-            <NavLink tag={RouteNavLink} to={item.to ? item.to : null}>
+            <NavLink tag={RouteNavLink} to={item.to}>
                 {item.htmlBefore && (
                     <div
                         className="d-inline-block item-icon-wrapper IconWraper"
@@ -29,11 +30,28 @@ const SidebarNavItem = ({ item, renderModal }) => {
 
     const toggle = () => setModal(!modal);
     const renderNavModelButton = item => {
-        const navItems = getNavItems();
-        console.log(navItems);
+        console.log('item==>', item);
         return (
             <div className="nav-link" onClick={toggle}>
-                {navItems && navItems.map((navItem, i) => navItem.model && renderModal(modal, toggle, navItem.title))}
+                {renderModal(modal, toggle, item.title)}
+                {item.htmlBefore && (
+                    <div
+                        className="d-inline-block item-icon-wrapper"
+                        dangerouslySetInnerHTML={{ __html: item.htmlBefore }}
+                    />
+                )}
+
+                {item.title && <span>{item.title}</span>}
+                <CollapseModal />
+            </div>
+        );
+    };
+
+    const renderNavCollapseModalButton = item => {
+        console.log('item==>', item);
+        return (
+            <div className="nav-link" onClick={toggle}>
+                {CollapseModal(modal, toggle, item.title)}
                 {item.htmlBefore && (
                     <div
                         className="d-inline-block item-icon-wrapper"
@@ -53,10 +71,11 @@ const SidebarNavItem = ({ item, renderModal }) => {
     };
 
     const renderNavItems = item => {
-        if (!item.button && !item.model) {
-            return renderNavLink(item);
-        } else {
-            return renderNavModelButton(item);
+        switch (item.type) {
+            case Type.Modal:
+                return renderNavModelButton(item);
+            default:
+                return renderNavLink(item);
         }
     };
 

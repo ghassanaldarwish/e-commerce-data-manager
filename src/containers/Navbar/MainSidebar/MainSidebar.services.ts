@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Store } from '../../flux';
-
+import { Store } from '../../../flux';
+import {} from '../navbarPrototypes';
 const MainSidebarServices = () => {
     const [values, setValues] = useState({
         navItems: Store.getSidebarItems(),
@@ -9,8 +9,6 @@ const MainSidebarServices = () => {
         value: '',
         image: '',
         htmlBefore: '',
-        affiliate: true,
-        nested: false,
     });
 
     useEffect(() => {
@@ -39,7 +37,7 @@ const MainSidebarServices = () => {
     };
 
     const onChangeCheckbox = () => {
-        setValues({ ...values, nested: !values.nested });
+        setValues({ ...values });
     };
 
     const onSubmitNewCategory = (e: any) => {
@@ -50,8 +48,9 @@ const MainSidebarServices = () => {
             title,
             image,
             value,
-            to: value,
+            to: '/',
             htmlBefore: icon,
+            isOpen: true,
         };
 
         setValues({

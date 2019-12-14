@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'shards-react';
-import MainNavbar from '../containers/MainNavbar/MainNavbar';
-import MainSidebar from '../containers/MainSidebar/MainSidebar';
+import MainNavbar from '../containers/Navbar/MainNavbar/MainNavbar';
+import MainSidebar from '../containers/Navbar/MainSidebar/MainSidebar';
 import MainFooter from '../containers/MainFooter';
 
 const DefaultLayout = ({ children, noNavbar, noFooter }) => (

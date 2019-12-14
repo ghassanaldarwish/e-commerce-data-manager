@@ -1,33 +1,33 @@
-import axios from 'axios';
+// import axios from 'axios';
 
-const DataCenter = () => {
-    const getNavItems = () => {
-        return [
-            {
-                title: 'Blog Dashboard',
-                to: '/blog-overview',
-                htmlBefore: '<i class="material-icons">dashboard</i>',
-                htmlAfter: '',
-                nested: false,
-            },
-            {
-                title: 'New Category',
-                value: 'newCategory',
-                htmlBefore: '<i class="material-icons">add</i>',
-                to: '/blog-posts',
-                botton: true,
-                model: true,
-                nested: false,
-            },
-        ];
-    };
+// const DataCenter = () => {
+//     const getNavItems = () => {
+//         return [
+//             {
+//                 title: 'Blog Dashboard',
+//                 to: '/blog-overview',
+//                 htmlBefore: '<i class="material-icons">dashboard</i>',
+//                 htmlAfter: '',
+//                 type:'link',
+//                 nested: false,
+//             },
+//             {
+//                 title: 'New Category',
+//                 value: 'newCategory',
+//                 htmlBefore: '<i class="material-icons">add</i>',
+//                 to: '/',
+//                 type:'model',
+//                 nested: false,
+//             },
+//         ];
+//     };
 
-    return {
-        getNavItems,
-    };
-};
+//     return {
+//         getNavItems,
+//     };
+// };
 
-export default DataCenter;
+// export default DataCenter;
 
 // return [
 //   {

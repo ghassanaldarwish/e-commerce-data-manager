@@ -1,12 +1,26 @@
 import { EventEmitter } from 'events';
-
+import { Type } from '../containers/Navbar/Navbar.enum';
 import Dispatcher from './dispatcher';
 import Constants from './constants';
-import getSidebarNavItems from '../data/sidebar-nav-items';
 
 const _store = {
     menuVisible: false,
-    navItems: getSidebarNavItems().getNavItems(),
+    navItems: [
+        {
+            title: 'Blog Dashboard',
+            to: '/blog-overview',
+            htmlBefore: '<i class="material-icons">dashboard</i>',
+            htmlAfter: '',
+            type: Type.Link,
+        },
+        {
+            title: 'New Category',
+            value: 'newCategory',
+            htmlBefore: '<i class="material-icons">add</i>',
+            to: '/',
+            type: Type.Modal,
+        },
+    ],
 };
 
 class Store extends EventEmitter {
