@@ -66,4 +66,7 @@ typings/
 firebase.json
 .firebase
 
+#package-lock.json
+package-lock.json
+
 

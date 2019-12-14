@@ -4,7 +4,7 @@ import Dispatcher from './dispatcher';
 import Constants from './constants';
 import getSidebarNavItems from '../data/sidebar-nav-items';
 
-let _store = {
+const _store = {
     menuVisible: false,
     navItems: getSidebarNavItems(),
 };
