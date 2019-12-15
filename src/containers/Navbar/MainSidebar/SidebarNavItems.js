@@ -1,31 +1,20 @@
 import React from 'react';
 import { Nav } from 'shards-react';
 import SidebarNavItem from './SidebarNavItem';
-import NewCategoryModal from '../../../components/NewCategorn/NewCategorn';
+import DialogModal from '../../../components/DialogModal/DialogModal';
 import Input from '../../../components/InputField/InputField';
 import MainSidebarServices from './MainSidebar.services';
 import { formConfig } from '../navbarPrototypes';
+import CreateNewCategoryModal from '../../../Templates/createNewCategoryModal/createNewCategoryModal';
+import CollapseModal from '../../../components/CollapseModal/CollapseModal';
 
 const SidebarNavItems = () => {
     const { values, create, onChangeField, onSubmitNewCategory, onChangeCheckbox } = MainSidebarServices();
     const { navItems } = values;
 
     const renderModal = (modal, toggle, title) => {
-        return (
-            <NewCategoryModal title={title} onSubmitNewCategory={onSubmitNewCategory} modal={modal} toggle={toggle}>
-                {formConfig.map(
-                    (config, index) =>
-                        Input && (
-                            <Input
-                                onChangeCheckbox={onChangeCheckbox}
-                                onChangeField={onChangeField}
-                                key={index}
-                                {...config}
-                            />
-                        ),
-                )}
-            </NewCategoryModal>
-        );
+        const data = { modal, toggle, title, onSubmitNewCategory, formConfig, onChangeCheckbox, onChangeField };
+        return <CreateNewCategoryModal {...data} />;
     };
 
     console.log(values);
@@ -33,9 +22,11 @@ const SidebarNavItems = () => {
     return (
         <div className="nav-wrapper">
             <Nav className="nav--no-borders flex-column">
-                {navItems.map((item, idx) => (
+                <CollapseModal navItems={navItems} />
+
+                {/* {navItems.map((item, idx) => (
                     <SidebarNavItem renderModal={renderModal} key={idx} item={item} />
-                ))}
+                ))} */}
             </Nav>
         </div>
     );

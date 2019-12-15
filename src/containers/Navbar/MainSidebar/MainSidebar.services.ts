@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Store } from '../../../flux';
-import {} from '../navbarPrototypes';
+import { addItemModal } from '../navbarPrototypes';
+import { Type } from '../Navbar.enum';
 const MainSidebarServices = () => {
     const [values, setValues] = useState({
         navItems: Store.getSidebarItems(),
+        categoryType: '',
         title: '',
         value: '',
         image: '',
@@ -31,8 +33,15 @@ const MainSidebarServices = () => {
     const create = (NewCategory: any) => {
         console.log('the data created!', NewCategory);
     };
+
+    const onChangeSelect = (e: any) => {
+        const { name, value } = e.target;
+        console.log('onChangeSelect');
+        // setValues({ ...values, [name]: value });
+    };
     const onChangeField = (e: any) => {
         const { name, value } = e.target;
+        console.log('onChangeSelect', e.target);
         setValues({ ...values, [name]: value });
     };
 
@@ -42,15 +51,19 @@ const MainSidebarServices = () => {
 
     const onSubmitNewCategory = (e: any) => {
         e.preventDefault();
-        const { title, image, value, htmlBefore } = values;
+
+        const { title, image, value, htmlBefore, categoryType } = values;
         const icon = `<i class="material-icons">${htmlBefore.toLowerCase().replace(' ', '_')}</i>`;
+        const options = categoryType === Type.Collapse ? [addItemModal] : null;
         const NewCategory = {
+            categoryType,
             title,
             image,
             value,
-            to: '/',
+            to: '/' + value,
             htmlBefore: icon,
             isOpen: true,
+            options,
         };
 
         setValues({

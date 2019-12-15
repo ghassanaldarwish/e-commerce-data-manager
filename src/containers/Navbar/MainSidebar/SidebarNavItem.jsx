@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { NavLink as RouteNavLink } from 'react-router-dom';
 import { NavItem, NavLink } from 'shards-react';
 import './MainSidebar.css';
@@ -28,45 +28,47 @@ const SidebarNavItem = ({ item, renderModal }) => {
         );
     };
 
-    const toggle = () => setModal(!modal);
+    const toggleOpen = () => setModal(true);
+
+    const toggleClose = () => {
+        setModal(false);
+        console.log('modat closed', modal);
+    };
     const renderNavModelButton = item => {
         console.log('item==>', item);
         return (
-            <div className="nav-link" onClick={toggle}>
-                {renderModal(modal, toggle, item.title)}
-                {item.htmlBefore && (
-                    <div
-                        className="d-inline-block item-icon-wrapper"
-                        dangerouslySetInnerHTML={{ __html: item.htmlBefore }}
-                    />
-                )}
+            <Fragment>
+                <div className="nav-link" onClick={toggleOpen}>
+                    {item.htmlBefore && (
+                        <div
+                            className="d-inline-block item-icon-wrapper"
+                            dangerouslySetInnerHTML={{ __html: item.htmlBefore }}
+                        />
+                    )}
 
-                {item.title && <span>{item.title}</span>}
-                <CollapseModal />
-            </div>
+                    {item.title && <span>{item.title}</span>}
+                </div>
+                {renderModal(modal, toggleClose, item.title)}
+            </Fragment>
         );
     };
 
-    const renderNavCollapseModalButton = item => {
+    const renderNavCollapseModelButton = item => {
         console.log('item==>', item);
         return (
-            <div className="nav-link" onClick={toggle}>
-                {CollapseModal(modal, toggle, item.title)}
-                {item.htmlBefore && (
-                    <div
-                        className="d-inline-block item-icon-wrapper"
-                        dangerouslySetInnerHTML={{ __html: item.htmlBefore }}
-                    />
-                )}
-
-                {item.title && <span>{item.title}</span>}
-                {item.htmlAfter && (
-                    <div
-                        className="d-inline-block item-icon-wrapper"
-                        dangerouslySetInnerHTML={{ __html: item.htmlAfter }}
-                    />
-                )}
-            </div>
+            <Fragment>
+                <div className="nav-link" onClick={toggleOpen}>
+                    {item.htmlBefore && (
+                        <div
+                            className="d-inline-block item-icon-wrapper"
+                            dangerouslySetInnerHTML={{ __html: item.htmlBefore }}
+                        />
+                    )}
+                    {item.title && <span>{item.title}</span>}
+                    /> )}
+                </div>
+                {CollapseModal(modal, toggleClose, item.title)}
+            </Fragment>
         );
     };
 
@@ -74,6 +76,8 @@ const SidebarNavItem = ({ item, renderModal }) => {
         switch (item.type) {
             case Type.Modal:
                 return renderNavModelButton(item);
+            case Type.Collapse:
+                return renderNavCollapseModelButton(item);
             default:
                 return renderNavLink(item);
         }

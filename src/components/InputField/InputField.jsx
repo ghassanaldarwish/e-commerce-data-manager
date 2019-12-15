@@ -11,6 +11,7 @@ import {
     DropdownItem,
 } from 'reactstrap';
 import './InputField.css';
+import { TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 const InputField = props => {
     const {
         forOrigin,
@@ -27,31 +28,54 @@ const InputField = props => {
         isDropdownOpen,
         dropdownToggle,
         options,
+        variant,
+        color,
     } = props;
 
     let element = null;
 
     switch (inputElement) {
+        case 'button':
+            element = (
+                <Button variant={variant} color={color}>
+                    {title}
+                </Button>
+            );
         case 'dropdown':
             element = (
-                <Dropdown isOpen={true} toggle={() => true}>
-                    <DropdownToggle caret>{title}</DropdownToggle>
-                    <DropdownMenu>
+                <FormControl variant="outlined">
+                    <InputLabel id="demo-simple-select-outlined-label">{title}</InputLabel>
+                    <Select
+                        label={title}
+                        variant="outlined"
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        //  value={age}
+                        name={name}
+                        onChange={onChangeField}
+                        //  labelWidth={labelWidth}
+                    >
                         {options.map((option, i) => (
-                            <DropdownItem key={i}>{option.title}</DropdownItem>
+                            <MenuItem value={option.value} key={i}>
+                                {option.title}
+                            </MenuItem>
                         ))}
-                    </DropdownMenu>
-                </Dropdown>
+                    </Select>
+                </FormControl>
             );
             break;
         case 'input':
             element = (
-                <FormGroup>
-                    <Label for={forOrigin}>{title}</Label>
-                    <Input onChange={onChangeField} name={name} required={required} type={type} />
-                    {error && <FormFeedback>{error}</FormFeedback>}
-                    <FormText>{feedback}</FormText>
-                </FormGroup>
+                <TextField
+                    id={forOrigin}
+                    label={title}
+                    type={type}
+                    name={name}
+                    required={required}
+                    variant="outlined"
+                    helperText={feedback}
+                    onChange={onChangeField}
+                />
             );
 
             break;
