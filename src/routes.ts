@@ -5,8 +5,6 @@ import BlogOverview from './views/BlogOverview';
 import UserProfileLite from './views/UserProfileLite';
 import AddNewPost from './views/AddNewPost';
 import Errors from './views/Errors';
-import ComponentsOverview from './views/ComponentsOverview';
-import Tables from './views/Tables';
 import BlogPosts from './views/BlogPosts';
 import { Store } from './flux';
 import Products from './templates/Products/Products';
@@ -85,16 +83,7 @@ const Routes: Route[] = [
         layout: DefaultLayout,
         component: Errors,
     },
-    {
-        path: '/components-overview',
-        layout: DefaultLayout,
-        component: ComponentsOverview,
-    },
-    {
-        path: '/tables',
-        layout: DefaultLayout,
-        component: Tables,
-    },
+
     {
         path: '/blog-posts',
         layout: DefaultLayout,

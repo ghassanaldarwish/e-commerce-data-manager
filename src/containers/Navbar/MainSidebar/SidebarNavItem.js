@@ -1,14 +1,11 @@
 import React from 'react';
 import { Nav } from 'shards-react';
-import SidebarNavItem from './SidebarNavItem';
-import DialogModal from '../../../components/DialogModal/DialogModal';
-import Input from '../../../components/InputField/InputField';
 import MainSidebarServices from './MainSidebar.services';
 import { formConfig } from '../navbarPrototypes';
 import CreateNewCategoryModal from '../../../templates/createNewCategoryModal/createNewCategoryModal';
-import CollapseModal from '../../../components/CollapseModal/CollapseModal';
+import SidebarNavCollapse from './SidebarNavCollapse';
 
-const SidebarNavItems = () => {
+const SidebarNavItem = () => {
     const { values, create, onChangeField, onSubmitNewCategory, onChangeCheckbox } = MainSidebarServices();
     const { navItems } = values;
 
@@ -22,14 +19,10 @@ const SidebarNavItems = () => {
     return (
         <div className="nav-wrapper">
             <Nav className="nav--no-borders flex-column">
-                <CollapseModal navItems={navItems} />
-
-                {/* {navItems.map((item, idx) => (
-                    <SidebarNavItem renderModal={renderModal} key={idx} item={item} />
-                ))} */}
+                <SidebarNavCollapse navItems={navItems} />
             </Nav>
         </div>
     );
 };
 
-export default SidebarNavItems;
+export default SidebarNavItem;

@@ -113,14 +113,14 @@ export const proteinOptions = [
         key: uuid(),
         title: 'whey protein',
         affiliate: true,
-        type: Type.Collapse,
+        type: Type.Link,
         path: '/supplements/protein/whey_protein',
     },
     {
         key: uuid(),
         title: 'casein protein',
         affiliate: true,
-        type: Type.Collapse,
+        type: Type.Link,
         path: '/supplements/protein/casein_protein',
     },
 ];
@@ -130,14 +130,14 @@ export const performanceOptions = [
         key: uuid(),
         title: 'pre workout',
         affiliate: true,
-        type: Type.Collapse,
+        type: Type.Link,
         path: '/supplements/performance/pre_workout',
     },
     {
         key: uuid(),
         title: 'post workout recovery',
         affiliate: true,
-        type: Type.Collapse,
+        type: Type.Link,
         path: '/supplements/performance/post_workout_recovery',
     },
 ];

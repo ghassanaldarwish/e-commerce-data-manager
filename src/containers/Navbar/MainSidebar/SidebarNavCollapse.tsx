@@ -1,5 +1,4 @@
 import React from 'react';
-import './CollapseModal.css';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
@@ -9,14 +8,10 @@ import Label from '@material-ui/icons/Label';
 import Dashboard from '@material-ui/icons/Dashboard';
 import Check from '@material-ui/icons/Check';
 import Dehaze from '@material-ui/icons/Dehaze';
-
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { SvgIconProps } from '@material-ui/core/SvgIcon';
-import { Type } from '../../containers/Navbar/Navbar.enum';
+import { Type } from '../Navbar.enum';
 
 declare module 'csstype' {
     interface Properties {
@@ -147,7 +142,7 @@ const useStyles = makeStyles(
     }),
 );
 
-const CollapseModal = (props: any) => {
+const SidebarNavCollapse = (props: any) => {
     const classes = useStyles();
     const { navItems } = props;
     console.log('CollapseModal==>', props);
@@ -210,4 +205,4 @@ const CollapseModal = (props: any) => {
     );
 };
 
-export default CollapseModal;
+export default SidebarNavCollapse;
