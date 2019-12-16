@@ -6,6 +6,10 @@ import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import Label from '@material-ui/icons/Label';
+import Dashboard from '@material-ui/icons/Dashboard';
+import Check from '@material-ui/icons/Check';
+import Dehaze from '@material-ui/icons/Dehaze';
+
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -155,6 +159,14 @@ const CollapseModal = (props: any) => {
             defaultExpandIcon={<ArrowRightIcon />}
             defaultEndIcon={<div style={{ width: 24 }} />}
         >
+            <StyledTreeItem
+                to={'/blog-overview'}
+                type={Type.Link}
+                nodeId={'67789'}
+                labelText={'Dashboard'}
+                labelIcon={Dashboard}
+            ></StyledTreeItem>
+
             {navItems &&
                 navItems.map((item: any) => (
                     <StyledTreeItem
@@ -173,7 +185,7 @@ const CollapseModal = (props: any) => {
                                     to={option.path}
                                     type={option.type}
                                     labelText={option.title}
-                                    labelIcon={option.icon || SupervisorAccountIcon}
+                                    labelIcon={Dehaze}
                                     color="#1a73e8"
                                     bgColor="#e8f0fe"
                                 >
@@ -185,7 +197,7 @@ const CollapseModal = (props: any) => {
                                                 type={subOption.type}
                                                 nodeId={subOption.key}
                                                 labelText={subOption.title}
-                                                labelIcon={subOption.icon || SupervisorAccountIcon}
+                                                labelIcon={Check}
                                                 color="#1a73e8"
                                                 bgColor="#e8f0fe"
                                             ></StyledTreeItem>

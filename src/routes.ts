@@ -9,7 +9,7 @@ import ComponentsOverview from './views/ComponentsOverview';
 import Tables from './views/Tables';
 import BlogPosts from './views/BlogPosts';
 import { Store } from './flux';
-import Products from './templates/products';
+import Products from './templates/Products/Products';
 
 export interface Route {
     path: string;
