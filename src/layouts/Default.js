@@ -5,24 +5,26 @@ import MainNavbar from '../containers/Navbar/MainNavbar/MainNavbar';
 import MainSidebar from '../containers/Navbar/MainSidebar/MainSidebar';
 import MainFooter from '../containers/MainFooter';
 
-const DefaultLayout = ({ children, noNavbar, noFooter }) => (
-    <Container fluid>
-        <Row>
-            <MainSidebar />
-            <Col
-                className="main-content p-0"
-                lg={{ size: 10, offset: 2 }}
-                md={{ size: 9, offset: 3 }}
-                sm="12"
-                tag="main"
-            >
-                {!noNavbar && <MainNavbar />}
-                {children}
-                {!noFooter && <MainFooter />}
-            </Col>
-        </Row>
-    </Container>
-);
+const DefaultLayout = ({ children, noNavbar, noFooter, navbarConfig }) => {
+    return (
+        <Container fluid>
+            <Row>
+                <MainSidebar />
+                <Col
+                    className="main-content p-0"
+                    lg={{ size: 10, offset: 2 }}
+                    md={{ size: 9, offset: 3 }}
+                    sm="12"
+                    tag="main"
+                >
+                    {!noNavbar && <MainNavbar />}
+                    {children}
+                    {!noFooter && <MainFooter />}
+                </Col>
+            </Row>
+        </Container>
+    );
+};
 
 DefaultLayout.propTypes = {
     /**

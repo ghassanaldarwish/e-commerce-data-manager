@@ -4,74 +4,10 @@ import Dispatcher from './dispatcher';
 import Constants from './constants';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AddIcon from '@material-ui/icons/Add';
-
+import { navbarConfig } from '../containers/Navbar/navbarPrototypes';
 const _store = {
     menuVisible: false,
-    navItems: [
-        {
-            title: 'Blog Dashboard',
-            to: '/blog-overview',
-            htmlBefore: '<i class="material-icons">dashboard</i>',
-            htmlAfter: '',
-            type: Type.Link,
-            icon: DashboardIcon,
-        },
-        {
-            title: 'New Category',
-            value: 'newCategory',
-            htmlBefore: '<i class="material-icons">add</i>',
-            to: '/',
-            icon: AddIcon,
-            type: Type.Modal,
-        },
-        {
-            title: 'supplement',
-            image: '',
-            value: 'supplement',
-            htmlBefore: '',
-            isOpen: true,
-            to: '/',
-            type: Type.Collapse,
-            options: [
-                {
-                    title: 'New Category',
-                    value: 'newCategory',
-                    htmlBefore: '<i class="material-icons">add</i>',
-                    to: '/',
-                    icon: AddIcon,
-                    type: Type.Modal,
-                },
-                {
-                    title: 'protein',
-                    image: '',
-                    value: 'protein',
-                    htmlBefore: '',
-                    isOpen: true,
-                    to: '/',
-                    type: Type.Collapse,
-                    options: [
-                        {
-                            title: 'New Category',
-                            value: 'newCategory',
-                            htmlBefore: '<i class="material-icons">add</i>',
-                            to: '/',
-                            icon: AddIcon,
-                            type: Type.Modal,
-                        },
-                        {
-                            title: 'why protein',
-                            image: '',
-                            value: 'whyProtein',
-                            htmlBefore: '',
-                            isOpen: true,
-                            to: '/protein',
-                            type: Type.Link,
-                        },
-                    ],
-                },
-            ],
-        },
-    ],
+    navItems: navbarConfig,
 };
 
 class Store extends EventEmitter {

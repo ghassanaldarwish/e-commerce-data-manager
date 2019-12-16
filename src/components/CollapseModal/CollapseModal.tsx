@@ -156,21 +156,21 @@ const CollapseModal = (props: any) => {
             defaultEndIcon={<div style={{ width: 24 }} />}
         >
             {navItems &&
-                navItems.map((item: any, idx: any) => (
+                navItems.map((item: any) => (
                     <StyledTreeItem
-                        to={navItems.to}
+                        to={navItems.path}
                         type={navItems.type}
-                        nodeId={idx}
-                        key={idx}
+                        nodeId={item.key}
+                        key={item.key}
                         labelText={item.title}
                         labelIcon={item.icon || Label}
                     >
                         {item.options &&
-                            item.options.map((option: any, oIdx: any) => (
+                            item.options.map((option: any) => (
                                 <StyledTreeItem
-                                    key={oIdx}
-                                    nodeId={oIdx}
-                                    to={option.to}
+                                    key={option.key}
+                                    nodeId={option.key}
+                                    to={option.path}
                                     type={option.type}
                                     labelText={option.title}
                                     labelIcon={option.icon || SupervisorAccountIcon}
@@ -178,12 +178,12 @@ const CollapseModal = (props: any) => {
                                     bgColor="#e8f0fe"
                                 >
                                     {option.options &&
-                                        option.options.map((subOption: any, sOIdx: any) => (
+                                        option.options.map((subOption: any) => (
                                             <StyledTreeItem
-                                                key={sOIdx}
-                                                to={subOption.to}
+                                                key={subOption.key}
+                                                to={subOption.path}
                                                 type={subOption.type}
-                                                nodeId={sOIdx}
+                                                nodeId={subOption.key}
                                                 labelText={subOption.title}
                                                 labelIcon={subOption.icon || SupervisorAccountIcon}
                                                 color="#1a73e8"

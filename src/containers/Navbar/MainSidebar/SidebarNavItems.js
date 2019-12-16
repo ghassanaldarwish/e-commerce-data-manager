@@ -5,7 +5,7 @@ import DialogModal from '../../../components/DialogModal/DialogModal';
 import Input from '../../../components/InputField/InputField';
 import MainSidebarServices from './MainSidebar.services';
 import { formConfig } from '../navbarPrototypes';
-import CreateNewCategoryModal from '../../../Templates/createNewCategoryModal/createNewCategoryModal';
+import CreateNewCategoryModal from '../../../templates/createNewCategoryModal/createNewCategoryModal';
 import CollapseModal from '../../../components/CollapseModal/CollapseModal';
 
 const SidebarNavItems = () => {
