@@ -1,9 +1,6 @@
 import { EventEmitter } from 'events';
-import { Type } from '../containers/Navbar/Navbar.enum';
 import Dispatcher from './dispatcher';
 import Constants from './constants';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import AddIcon from '@material-ui/icons/Add';
 import { navbarConfig } from '../containers/Navbar/navbarPrototypes';
 const _store = {
     menuVisible: false,

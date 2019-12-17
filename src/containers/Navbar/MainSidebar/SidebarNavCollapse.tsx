@@ -106,7 +106,6 @@ const renderDiv = (classes: any, LabelIcon: any, labelText: any, labelInfo: any)
 function StyledTreeItem(props: any) {
     const classes = useTreeItemStyles();
     const { labelText, labelIcon: LabelIcon, labelInfo, color, bgColor, to, type, ...other } = props;
-    let element;
     console.log(type);
 
     return (

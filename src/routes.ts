@@ -1,13 +1,10 @@
 import { FunctionComponent } from 'react';
 
 import { DefaultLayout } from './layouts';
-import BlogOverview from './views/BlogOverview';
-import UserProfileLite from './views/UserProfileLite';
-import AddNewPost from './views/AddNewPost';
-import Errors from './views/Errors';
-import BlogPosts from './views/BlogPosts';
+import BlogOverview from './containers/BlogOverview';
+import Errors from './containers/Errors';
 import { Store } from './flux';
-import Products from './templates/Products/Products';
+import Products from './containers/Products/Products.container';
 
 export interface Route {
     path: string;
@@ -63,33 +60,12 @@ const Routes: Route[] = [
         layout: DefaultLayout,
         component: BlogOverview,
     },
-    {
-        path: '/blog-overview',
-        layout: DefaultLayout,
-        component: BlogOverview,
-    },
-    {
-        path: '/user-profile-lite',
-        layout: DefaultLayout,
-        component: UserProfileLite,
-    },
-    {
-        path: '/add-new-post',
-        layout: DefaultLayout,
-        component: AddNewPost,
-    },
+    ...navBarRoutes,
     {
         path: '/errors',
         layout: DefaultLayout,
         component: Errors,
     },
-
-    {
-        path: '/blog-posts',
-        layout: DefaultLayout,
-        component: BlogPosts,
-    },
-    ...navBarRoutes,
 ];
 
 export default Routes;

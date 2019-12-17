@@ -34,11 +34,6 @@ const MainSidebarServices = () => {
         console.log('the data created!', NewCategory);
     };
 
-    const onChangeSelect = (e: any) => {
-        const { name, value } = e.target;
-        console.log('onChangeSelect');
-        // setValues({ ...values, [name]: value });
-    };
     const onChangeField = (e: any) => {
         const { name, value } = e.target;
         console.log('onChangeSelect', e.target);
