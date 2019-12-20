@@ -10,3 +10,8 @@
     display: block !important;
     margin: 25px !important;
 }
+
+.QuillTextEditor {
+    height: 500px;
+    margin-bottom: 60px;
+}

@@ -1,98 +1,66 @@
 import React from 'react';
-import {
-    FormGroup,
-    Label,
-    Input,
-    FormFeedback,
-    FormText,
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-} from 'reactstrap';
 import './InputField.css';
-import { TextField, Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
+import QuillTextEditor from './QuillTextEditor';
 const InputField = props => {
     const {
-        forOrigin,
-        title,
-        error,
-        feedback,
-        required,
-        type,
-        name,
-        inputElement,
-        onChangeField,
+        elementType,
+        elementConfig,
         value,
-        onChangeCheckbox,
-        isDropdownOpen,
-        dropdownToggle,
-        options,
-        variant,
-        color,
+        validation,
+        valid,
+        touched,
+        quillTextEditorData,
+        inputChangedHandler,
+        fieldKey,
+        errors,
     } = props;
 
     let element = null;
 
-    switch (inputElement) {
+    switch (elementType) {
+        case 'quill':
+            element = (
+                <div>
+                    <label> {elementConfig.label}</label>
+                    <QuillTextEditor quillData={value} quillTextEditorData={quillTextEditorData} />
+                </div>
+            );
+            break;
         case 'button':
             element = (
-                <Button variant={variant} color={color}>
-                    {title}
+                <Button type={elementConfig.type} variant="contained" color="primary">
+                    {elementConfig.label}
                 </Button>
-            );
-        case 'dropdown':
-            element = (
-                <FormControl variant="outlined">
-                    <InputLabel id="demo-simple-select-outlined-label">{title}</InputLabel>
-                    <Select
-                        label={title}
-                        variant="outlined"
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        //  value={age}
-                        name={name}
-                        onChange={onChangeField}
-                        //  labelWidth={labelWidth}
-                    >
-                        {options.map((option, i) => (
-                            <MenuItem value={option.value} key={i}>
-                                {option.title}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
             );
             break;
         case 'input':
             element = (
                 <TextField
-                    id={forOrigin}
-                    label={title}
-                    type={type}
-                    name={name}
-                    required={required}
+                    error={!!errors}
+                    label={elementConfig.label}
+                    type={elementConfig.type}
+                    required={validation.required}
                     variant="outlined"
-                    helperText={feedback}
-                    onChange={onChangeField}
+                    helperText={
+                        !!errors && (
+                            <div>
+                                <div>
+                                    Could you check=> {elementConfig.label}: {errors.header}
+                                </div>
+                                <ul>{!!errors.list && errors.list.map((item, i) => <li key={i}>{item}</li>)}</ul>
+                            </div>
+                        )
+                    }
+                    onChange={e => inputChangedHandler(e, fieldKey)}
+                    value={value}
                 />
-            );
-
-            break;
-        case 'checkbox':
-            element = (
-                <FormGroup check>
-                    <div className="Checkbox">
-                        <Label for={forOrigin}>{title}</Label>
-                        <Input defaultChecked={value} onChange={onChangeCheckbox} name={name} type={type} />
-                    </div>
-                </FormGroup>
             );
 
             break;
 
         default:
-            element = <div>Element Type: {inputElement} NOT FOUND</div>;
+            element = <div>Element Type: {elementType} NOT FOUND</div>;
             break;
     }
 

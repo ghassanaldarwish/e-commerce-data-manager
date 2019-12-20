@@ -4,7 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import StickyHeadTable from '../../components/StickyHeadTable/StickyHeadTable';
 import FabButtonAddIcon from '../../components/FabButtonAddIcon/FabButtonAddIcon';
-import FullScreenModalComponent from '../../components/FullScreenModal/FullScreenModal.component';
+
+import AddProductForm from './AddProductForm/AddProductForm';
 const ProductsContainer = () => {
     const [open, setOpen] = React.useState(false);
 
@@ -32,7 +33,7 @@ const ProductsContainer = () => {
             </Container>
 
             <StickyHeadTable />
-            <FullScreenModalComponent handleClose={handleClose} open={open} />
+            <AddProductForm handleClose={handleClose} open={open} />
         </React.Fragment>
     );
 };
