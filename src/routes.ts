@@ -45,8 +45,6 @@ const navbar = (navbar: any) => {
     }
 };
 
-const navBarRoutes = navbar(navbarConfig);
-
-const Routes: Route[] = [...navBarRoutes];
+const Routes = navbar(navbarConfig);
 
 export default Routes;

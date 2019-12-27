@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import FullScreenModalComponent from '../../../components/FullScreenModal/FullScreenModal.component';
 import formConfig from './formConfig';
 import InputField from '../../../components/InputField/InputField';
-import { scroller, Events } from 'react-scroll';
 import axios from 'axios';
 const AddProductForm = ({ handleClose, open }) => {
     const [configs, setConfigs] = useState(formConfig);
     const [errors, setErrors] = useState();
+
     const quillTextEditorData = data => {
         setConfigs({ ...configs, productReview: { ...configs.productReview, value: data.ops } });
         localStorage.setItem('productReview', JSON.stringify(data.ops));
@@ -66,20 +66,15 @@ const AddProductForm = ({ handleClose, open }) => {
                     ...errors,
                     errors: { ...error.response.data, statusText: error.response.statusText },
                 });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                scroller.scrollTo('root', {
-                    smooth: true,
-                    duration: 800,
-                    delay: 0,
-                    smooth: 'easeInOutQuart',
-                });
                 console.log({ ...error.response });
             }
         }
     };
     const renderErrorMessage = () => {
         return (
-            <div>
+            <div id="test">
                 <div>
                     Submit data Fail:
                     {errors.errors.statusText}
