@@ -1,15 +1,9 @@
-import { FunctionComponent } from 'react';
-
-import { DefaultLayout } from './layouts';
-import BlogOverview from './containers/BlogOverview';
-import Errors from './containers/Errors';
-import { Store } from './flux';
 import Products from './containers/Products/Products.container';
+import { navbarConfig } from './navbar/navbarPrototypes';
 
 export interface Route {
     path: string;
     exact?: boolean;
-    layout: FunctionComponent<any>;
     component: any;
 }
 
@@ -20,7 +14,7 @@ const navbar = (navbar: any) => {
             pullAllNavbarItems.push({
                 path: category.path,
                 exact: true,
-                layout: DefaultLayout,
+
                 component: Products,
             });
             if (!!category.options) {
@@ -28,7 +22,7 @@ const navbar = (navbar: any) => {
                     pullAllNavbarItems.push({
                         path: subItem.path,
                         exact: true,
-                        layout: DefaultLayout,
+
                         component: Products,
                     });
                     if (!!subItem.options) {
@@ -36,7 +30,7 @@ const navbar = (navbar: any) => {
                             pullAllNavbarItems.push({
                                 path: subSubItem.path,
                                 exact: true,
-                                layout: DefaultLayout,
+
                                 component: Products,
                             }),
                         );
@@ -51,21 +45,8 @@ const navbar = (navbar: any) => {
     }
 };
 
-const navBarRoutes = navbar(Store.getSidebarItems());
+const navBarRoutes = navbar(navbarConfig);
 
-const Routes: Route[] = [
-    {
-        path: '/',
-        exact: true,
-        layout: DefaultLayout,
-        component: BlogOverview,
-    },
-    ...navBarRoutes,
-    {
-        path: '/errors',
-        layout: DefaultLayout,
-        component: Errors,
-    },
-];
+const Routes: Route[] = [...navBarRoutes];
 
 export default Routes;

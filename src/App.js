@@ -1,31 +1,58 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from './containers/Login/Login';
 import routes from './routes';
+import NavbarDrawer from './navbar/Navbar';
+import AppServices from './App.services';
+import ErrorBound from './errorBounder/errorBounder';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './assets/styles/shards-dashboards.1.1.0.min.css';
+export default () => {
+    const { values } = AppServices();
+    return (
+        <ErrorBound>
+            <Switch>
+                {values.isSignIn && values.admin ? (
+                    <NavbarDrawer>
+                        <div>
+                            {routes.map((route, index) => {
+                                return (
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        exact={route.exact}
+                                        component={props => {
+                                            return <route.component {...props} />;
+                                        }}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </NavbarDrawer>
+                ) : (
+                    <Login values={values} />
+                )}
+            </Switch>
+        </ErrorBound>
 
-export default () => (
-    <Login />
-    // <Router basename={process.env.REACT_APP_BASENAME || ''}>
-    //     <div>
-    //         {routes.map((route, index) => {
-    //             return (
-    //                 <Route
-    //                     key={index}
-    //                     path={route.path}
-    //                     exact={route.exact}
-    //                     component={props => {
-    //                         return (
-    //                             <route.layout {...props}>
-    //                                 <route.component {...props} />
-    //                             </route.layout>
-    //                         );
-    //                     }}
-    //                 />
-    //             );
-    //         })}
-    //     </div>
-    // </Router>
-);
+        // <Router basename={process.env.REACT_APP_BASENAME || ''}>
+        // <div>
+        //     {routes.map((route, index) => {
+        //         return (
+        //             <Route
+        //                 key={index}
+        //                 path={route.path}
+        //                 exact={route.exact}
+        //                 component={props => {
+        //                     return (
+        //                         <route.layout {...props}>
+        //                             <route.component {...props} />
+        //                         </route.layout>
+        //                     );
+        //                 }}
+        //             />
+        //         );
+        //     })}
+        // </div>
+        // </Router>
+    );
+};

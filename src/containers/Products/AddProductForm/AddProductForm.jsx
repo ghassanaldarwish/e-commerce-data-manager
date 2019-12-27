@@ -25,6 +25,10 @@ const AddProductForm = ({ handleClose, open }) => {
             price: configs.price.value,
             image: configs.image.value,
             link: configs.link.value,
+            productSource: 'test',
+            categorie: 'test',
+            subCategorie: 'test',
+            subSubCategorie: 'test',
             description: configs.description.value,
             productReview: configs.productReview.value,
             productMedia: {
@@ -78,16 +82,16 @@ const AddProductForm = ({ handleClose, open }) => {
             <div>
                 <div>
                     Submit data Fail:
-                    {errors.statusText}
+                    {errors.errors.statusText}
                     Status code
-                    {errors.statusCode}
+                    {errors.errors.statusCode}
                 </div>
                 <div>
                     {' '}
-                    Error creator: '{errors.createdBy}
+                    Error creator: {errors.errors.createdBy}
                     ,Time stamp =>
-                    {errors.timestamp}, Path =>
-                    {errors.path}.{' '}
+                    {errors.errors.timestamp}, Path =>
+                    {errors.errors.path}.{' '}
                 </div>
             </div>
         );
@@ -96,16 +100,27 @@ const AddProductForm = ({ handleClose, open }) => {
         <FullScreenModalComponent handleClose={handleClose} open={open}>
             {!!errors && renderErrorMessage()}
             <form onSubmit={onSubmitProductHandler}>
-                {Object.keys(configs).map((config, index) => (
-                    <InputField
-                        errors={errors}
-                        key={index}
-                        {...configs[config]}
-                        fieldKey={config}
-                        quillTextEditorData={quillTextEditorData}
-                        inputChangedHandler={inputChangedHandler}
-                    />
-                ))}
+                {Object.keys(configs).map((config, index) => {
+                    let error;
+
+                    if (!!errors && !!errors.errors && !!errors.errors.validationException) {
+                        const validationException = errors.errors.validationException;
+                        console.log('ERRORS===>', validationException[config]);
+                        if (!!validationException[config]) {
+                            error = validationException[config];
+                        }
+                    }
+                    return (
+                        <InputField
+                            errors={error}
+                            key={index}
+                            {...configs[config]}
+                            fieldKey={config}
+                            quillTextEditorData={quillTextEditorData}
+                            inputChangedHandler={inputChangedHandler}
+                        />
+                    );
+                })}
             </form>
         </FullScreenModalComponent>
     );
