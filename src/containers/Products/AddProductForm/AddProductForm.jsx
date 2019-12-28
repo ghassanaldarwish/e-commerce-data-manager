@@ -1,77 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FullScreenModalComponent from '../../../components/FullScreenModal/FullScreenModal.component';
-import formConfig from './formConfig';
 import InputField from '../../../components/InputField/InputField';
-import axios from 'axios';
+import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs';
+import AddProductFormServices from './AddProductForm.services';
 const AddProductForm = ({ handleClose, open }) => {
-    const [configs, setConfigs] = useState(formConfig);
-    const [errors, setErrors] = useState();
-
-    const quillTextEditorData = data => {
-        setConfigs({ ...configs, productReview: { ...configs.productReview, value: data.ops } });
-        localStorage.setItem('productReview', JSON.stringify(data.ops));
-    };
-    const inputChangedHandler = (event, fieldKey) => {
-        setConfigs({ ...configs, [fieldKey]: { ...configs[fieldKey], value: event.target.value } });
-        localStorage.setItem([fieldKey], JSON.stringify(event.target.value));
-    };
-    const onSubmitProductHandler = async e => {
-        e.preventDefault();
-
-        const prodectData = {
-            title: configs.title.value,
-            subTitle: configs.subTitle.value,
-            brand: configs.brand.value,
-            price: configs.price.value,
-            image: configs.image.value,
-            link: configs.link.value,
-            productSource: 'test',
-            categorie: 'test',
-            subCategorie: 'test',
-            subSubCategorie: 'test',
-            description: configs.description.value,
-            productReview: configs.productReview.value,
-            productMedia: {
-                productImage: [
-                    {
-                        url: configs.productImage1.value,
-                    },
-                    {
-                        url: configs.productImage2.value,
-                    },
-                    {
-                        url: configs.productImage3.value,
-                    },
-                ],
-                peopleImage: [
-                    {
-                        url: configs.peopleImage1.value,
-                    },
-                    {
-                        url: configs.peopleImage2.value,
-                    },
-                    {
-                        url: configs.peopleImage3.value,
-                    },
-                ],
-            },
-        };
-        console.log('product ==>', prodectData);
-        try {
-            const product = await axios.post('/api/v1/products/', prodectData);
-            console.log('product ==>', product);
-        } catch (error) {
-            if (error.response) {
-                setErrors({
-                    ...errors,
-                    errors: { ...error.response.data, statusText: error.response.statusText },
-                });
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                console.log({ ...error.response });
-            }
-        }
-    };
+    const {
+        configs,
+        errors,
+        quillTextEditorData,
+        inputChangedHandler,
+        onSubmitProductHandler,
+        slugifyUrlPath,
+    } = AddProductFormServices();
     const renderErrorMessage = () => {
         return (
             <div id="test">
@@ -94,6 +34,7 @@ const AddProductForm = ({ handleClose, open }) => {
     return (
         <FullScreenModalComponent handleClose={handleClose} open={open}>
             {!!errors && renderErrorMessage()}
+            <Breadcrumbs items={slugifyUrlPath} />
             <form onSubmit={onSubmitProductHandler}>
                 {Object.keys(configs).map((config, index) => {
                     let error;
