@@ -6,9 +6,33 @@ import StickyHeadTable from '../../components/StickyHeadTable/StickyHeadTable';
 import FabButtonAddIcon from '../../components/FabButtonAddIcon/FabButtonAddIcon';
 
 import AddProductForm from './AddProductForm/AddProductForm';
+import ProductServices from './Products.services';
+interface Data {
+    _id: string;
+    name: string;
+    creator: string;
+    date: string;
+    source: string;
+}
+const products: Data[] = [
+    {
+        creator: 'Ghassan',
+        name: 'hjnnöknöknkö',
+        _id: '5e077159778ff1305448b38b',
+        source: 'amazon',
+        date: '2019-12-28T15:14:33.395Z',
+    },
+    {
+        creator: 'Ghassan',
+        name: 'hjnnöknöknkö',
+        _id: 'test',
+        source: 'amazon',
+        date: '2019-12-28T15:14:33.395Z',
+    },
+];
 const ProductsContainer = () => {
     const [open, setOpen] = React.useState(false);
-
+    const { getProductId, getProductsShort } = ProductServices();
     const handleClickOpen = () => {
         console.log('clicked');
         setOpen(true);
@@ -17,7 +41,6 @@ const ProductsContainer = () => {
     const handleClose = () => {
         setOpen(false);
     };
-
     return (
         <React.Fragment>
             <CssBaseline />
@@ -32,7 +55,7 @@ const ProductsContainer = () => {
                 <FabButtonAddIcon clickedHandler={handleClickOpen} />
             </Container>
 
-            <StickyHeadTable />
+            <StickyHeadTable getProductId={getProductId} rowsData={getProductsShort} />
             <AddProductForm handleClose={handleClose} open={open} />
         </React.Fragment>
     );

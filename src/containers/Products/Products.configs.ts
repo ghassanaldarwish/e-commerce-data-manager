@@ -1,4 +1,4 @@
-const addProductForm = {
+export const addProductForm = {
     title: {
         elementType: 'input',
         elementConfig: {
@@ -192,4 +192,43 @@ const addProductForm = {
     },
 };
 
-export default addProductForm;
+export const prodectDataProvider = (configs: any, ct: any) => {
+    return {
+        title: configs.title.value,
+        subTitle: configs.subTitle.value,
+        brand: configs.brand.value,
+        price: configs.price.value,
+        image: configs.image.value,
+        link: configs.link.value,
+        productSource: 'amazon',
+        categorie: ct[0],
+        subCategorie: ct[1],
+        subSubCategorie: ct[2],
+        description: configs.description.value,
+        productReview: configs.productReview.value,
+        productMedia: {
+            productImage: [
+                {
+                    url: configs.productImage1.value,
+                },
+                {
+                    url: configs.productImage2.value,
+                },
+                {
+                    url: configs.productImage3.value,
+                },
+            ],
+            peopleImage: [
+                {
+                    url: configs.peopleImage1.value,
+                },
+                {
+                    url: configs.peopleImage2.value,
+                },
+                {
+                    url: configs.peopleImage3.value,
+                },
+            ],
+        },
+    };
+};

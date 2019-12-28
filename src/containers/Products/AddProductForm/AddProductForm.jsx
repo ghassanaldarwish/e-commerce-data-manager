@@ -2,7 +2,7 @@ import React from 'react';
 import FullScreenModalComponent from '../../../components/FullScreenModal/FullScreenModal.component';
 import InputField from '../../../components/InputField/InputField';
 import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs';
-import AddProductFormServices from './AddProductForm.services';
+import ProductServices from '../Products.services';
 const AddProductForm = ({ handleClose, open }) => {
     const {
         configs,
@@ -11,7 +11,7 @@ const AddProductForm = ({ handleClose, open }) => {
         inputChangedHandler,
         onSubmitProductHandler,
         slugifyUrlPath,
-    } = AddProductFormServices();
+    } = ProductServices();
     const renderErrorMessage = () => {
         return (
             <div id="test">

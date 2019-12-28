@@ -3,8 +3,6 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import HomeIcon from '@material-ui/icons/Home';
-import WhatshotIcon from '@material-ui/icons/Whatshot';
-import GrainIcon from '@material-ui/icons/Grain';
 import './Breadcrumbs.css';
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -24,7 +22,7 @@ export default function BreadcrumbsNav(props: any) {
 
     return (
         <Breadcrumbs aria-label="breadcrumb">
-            {props.items().map((item: any, index: any) => (
+            {props.items(true).map((item: any, index: any) => (
                 <Typography key={index} color="textPrimary" className={classes.link}>
                     <HomeIcon className={classes.icon} />
                     {item}
