@@ -1,18 +1,99 @@
 import { useState, useEffect } from 'react';
 import { addProductForm, prodectDataProvider } from './Products.configs';
 import Axios from 'axios';
-
+export enum Actions {
+    Edit = 'edit',
+}
 const ProductServices = () => {
     const [configs, setConfigs] = useState(addProductForm as any);
+    const [open, setOpen] = useState(false);
     const [products, setProducts] = useState();
+    const [action, setAction] = useState();
+    const [product, setProduct] = useState();
     const [errors, setErrors] = useState();
+    const [openAlertsDialogModal, setOpenAlertsDialogModal] = useState(false);
+    const setProductLocally = (id: string) => {
+        setProduct(products.find((product: any) => product._id === id));
+    };
+    const handleClickOpenAlertsDialogModal = (id: string) => {
+        setProductLocally(id);
+        setOpenAlertsDialogModal(true);
+    };
+
+    const handleCloseAlertsDialogModal = () => {
+        setOpenAlertsDialogModal(false);
+    };
+    const onDeleteButtonAlertsDialogModal = () => {
+        handleCloseAlertsDialogModal();
+        deleteProductById(product._id);
+        console.log('onDeleteButtonAlertsDialogModal');
+    };
+    const errorsHandler = (error: any) => {
+        if (error.response) {
+            setErrors({
+                errors: { ...error.response.data, statusText: error.response.statusText },
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            console.log({ ...error.response });
+        }
+    };
+
+    const handleClickOpen = (action: string, id: string) => {
+        setAction(action);
+        console.log('clicked');
+        if (action === 'edit') {
+            setProductLocally(id);
+            if (!!product) {
+                console.log('product==>', product);
+                const copyConfigs = { ...configs };
+
+                Object.keys(product).map((prod: any) => {
+                    copyConfigs[prod].value = product[prod];
+                });
+                console.log('  copyConfigs[prod].value = product[prod]==>', copyConfigs);
+                //  setConfigs(copyConfigs)
+            }
+            return setOpen(true);
+        }
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const findProductById = async (id: string) => {
+        console.log('findProductById ==>', id);
+        try {
+            const productData = await Axios(`/api/v1/products/${id}`);
+            console.log('product ==>', productData);
+            setProduct(productData.data);
+        } catch (ex) {
+            errorsHandler(ex);
+        }
+    };
+
+    const deleteProductById = async (id: string) => {
+        console.log('deleteProductById');
+        try {
+            const productData = await Axios.delete(`/api/v1/products/${id}`);
+            const newProducts = products.filter((product: any) => product._id !== id);
+            setProducts(newProducts);
+            console.log('product ==>', productData);
+        } catch (ex) {
+            errorsHandler(ex);
+        }
+    };
 
     const getProductId = (id: string, action?: string) => {
         switch (action) {
             case 'delete':
-                return console.log('getProductId => ', action, id);
+                return handleClickOpenAlertsDialogModal(id);
+            // case 'edit':
+            //     return findProductById(id)
             case 'edit':
-                return console.log('getProductId => ', action, id);
+                return handleClickOpen(action, id);
             default:
                 return console.log('getProductId => ', action, id);
         }
@@ -41,19 +122,11 @@ const ProductServices = () => {
             );
             console.log('products ==>', productsData);
             setProducts(productsData.data);
-        } catch (error) {
-            if (error.response) {
-                setErrors({
-                    ...errors,
-                    errors: { ...error.response.data, statusText: error.response.statusText },
-                });
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                console.log({ ...error.response });
-            }
+        } catch (ex) {
+            errorsHandler(ex);
         }
     };
-    const onSubmitProductHandler = async (e: any) => {
+    const onSubmitProductCreatedHandler = async (e: any) => {
         e.preventDefault();
         const ct = slugifyUrlPath(false);
         const prodectData = prodectDataProvider(configs, ct);
@@ -61,17 +134,22 @@ const ProductServices = () => {
         console.log('product ==>', prodectData);
         try {
             const product = await Axios.post('/api/v1/products/', prodectData);
-            console.log('product ==>', product);
-        } catch (error) {
-            if (error.response) {
-                setErrors({
-                    ...errors,
-                    errors: { ...error.response.data, statusText: error.response.statusText },
-                });
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            handleClose();
+            const newProducts = products.map((i: any) => i).push(product);
+            setProducts(newProducts);
+            console.log('product ==>', products);
+        } catch (ex) {
+            errorsHandler(ex);
+        }
+    };
 
-                console.log({ ...error.response });
-            }
+    const onSubmitProductEditHandler = async (e: any) => {
+        e.preventDefault();
+
+        try {
+            console.log('product ==>', products);
+        } catch (ex) {
+            errorsHandler(ex);
         }
     };
 
@@ -79,23 +157,34 @@ const ProductServices = () => {
         findProducts();
     }, []);
 
-    const getProductsShort: any = !!products
-        ? products.map((product: any) => ({
-              creator: product.creatorId,
-              name: product.title,
-              _id: product._id,
-              source: product.productSource,
-              date: product.date,
-          }))
-        : [];
+    const getProductsShort = () =>
+        (products &&
+            products.map((product: any) => ({
+                creator: product.creatorId,
+                name: product.title,
+                _id: product._id,
+                source: product.productSource,
+                date: product.date,
+            }))) ||
+        [];
 
     return {
+        action,
+        product,
+        onDeleteButtonAlertsDialogModal,
+        openAlertsDialogModal,
+        handleClickOpenAlertsDialogModal,
+        handleCloseAlertsDialogModal,
+        open,
+        handleClickOpen,
+        handleClose,
         getProductsShort,
+        onSubmitProductEditHandler,
         configs,
         errors,
         quillTextEditorData,
         inputChangedHandler,
-        onSubmitProductHandler,
+        onSubmitProductCreatedHandler,
         slugifyUrlPath,
         getProductId,
     };

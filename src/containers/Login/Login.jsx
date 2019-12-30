@@ -72,7 +72,7 @@ export default function Login(props) {
                         Sign In
                     </Button>
                     <Button
-                        href="http://localhost:7000/api/v1/auth/google"
+                        href="/api/v1/auth/google"
                         fullWidth
                         variant="contained"
                         color="secondary"

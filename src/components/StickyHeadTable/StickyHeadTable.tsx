@@ -62,7 +62,7 @@ const useStyles = makeStyles({
 export default function StickyHeadTable(props: any) {
     const classes = useStyles();
     const { rowsData, getProductId } = props;
-    console.log('StickyHeadTable ==>', !!rowsData);
+
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -91,7 +91,7 @@ export default function StickyHeadTable(props: any) {
         );
     };
 
-    return rowsData.length > 0 ? (
+    return rowsData().length > 0 ? (
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
@@ -105,28 +105,30 @@ export default function StickyHeadTable(props: any) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rowsData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: any) => {
-                            return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.creator}>
-                                    {columns.map(column => {
-                                        const value = row[column.id];
+                        {rowsData()
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((row: any) => {
+                                return (
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.creator}>
+                                        {columns.map(column => {
+                                            const value = row[column.id];
 
-                                        return (
-                                            <TableCell key={column.id} align={column.align}>
-                                                {column.id === 'actions' ? renderActions(row._id) : value}
-                                            </TableCell>
-                                        );
-                                    })}
-                                </TableRow>
-                            );
-                        })}
+                                            return (
+                                                <TableCell key={column.id} align={column.align}>
+                                                    {column.id === 'actions' ? renderActions(row._id) : value}
+                                                </TableCell>
+                                            );
+                                        })}
+                                    </TableRow>
+                                );
+                            })}
                     </TableBody>
                 </Table>
             </TableContainer>
             <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rowsData.length}
+                count={rowsData().length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}
