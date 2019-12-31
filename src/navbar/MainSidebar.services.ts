@@ -54,7 +54,15 @@ const MainSidebarServices = () => {
 
         create(NewCategory);
     };
+
+    const logout = () => {
+        if (!!localStorage.getItem('access_token')) {
+            localStorage.removeItem('access_token');
+            window.location.assign('/');
+        }
+    };
     return {
+        logout,
         values,
         create,
         onChangeField,

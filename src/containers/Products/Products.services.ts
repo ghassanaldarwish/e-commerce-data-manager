@@ -8,6 +8,8 @@ const ProductServices = () => {
     const [configs, setConfigs] = useState(addProductForm as any);
     const [configsEdit, setConfigsEdit] = useState(EditProductForm as any);
     const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+
     const [openEdit, setOpenEdit] = useState(false);
     const [products, setProducts] = useState();
     const [product, setProduct] = useState();
@@ -33,6 +35,7 @@ const ProductServices = () => {
     };
     const errorsHandler = (error: any) => {
         if (error.response) {
+            setLoading(false);
             setErrors({
                 errors: { ...error.response.data, statusText: error.response.statusText },
             });
@@ -76,10 +79,12 @@ const ProductServices = () => {
 
     const findProductById = async (id: string) => {
         console.log('findProductById ==>', id);
+        setLoading(true);
         try {
             const productData = await Axios(`/api/v1/products/${id}`);
             console.log('findProductById ==>', productData.data);
             setProduct(productData.data);
+            setLoading(false);
             return productData.data;
         } catch (ex) {
             errorsHandler(ex);
@@ -88,10 +93,12 @@ const ProductServices = () => {
 
     const deleteProductById = async (id: string) => {
         console.log('deleteProductById');
+        setLoading(true);
         try {
             const productData = await Axios.delete(`/api/v1/products/${id}`);
             const newProducts = products.filter((product: any) => product._id !== id);
             setProducts(newProducts);
+            setLoading(false);
             console.log('product ==>', productData);
         } catch (ex) {
             errorsHandler(ex);
@@ -141,12 +148,14 @@ const ProductServices = () => {
 
     const findProducts = async () => {
         const ct = slugifyUrlPath(false);
+        setLoading(true);
         try {
             const productsData = await Axios(
                 `/api/v1/products?categorie=${ct[0]}&subCategorie=${ct[1]}&subSubCategorie=${ct[2]}`,
             );
             console.log('products ==>', productsData);
             setProducts(productsData.data);
+            setLoading(false);
         } catch (ex) {
             errorsHandler(ex);
         }
@@ -155,11 +164,12 @@ const ProductServices = () => {
         e.preventDefault();
         const ct = slugifyUrlPath(false);
         const prodectData = prodectDataProvider(configs, ct);
-
+        setLoading(true);
         console.log('product ==>', prodectData);
         try {
             const product = await Axios.post('/api/v1/products/', prodectData);
             handleClose();
+            setLoading(false);
             // const newProducts = products.map((i: any) => i).push(product);
             // setProducts(newProducts);
             console.log('product ==>', products);
@@ -170,10 +180,12 @@ const ProductServices = () => {
 
     const onSubmitProductEditHandler = async (e: any, id: string) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const updateProduct: any = await Axios.put('/api/v1/products', product);
             console.log('onSubmitProductEditHandler ==>', updateProduct);
-            handleClose();
+            setLoading(false);
+            handleCloseEdit();
         } catch (ex) {
             errorsHandler(ex);
         }
@@ -195,6 +207,7 @@ const ProductServices = () => {
         [];
 
     return {
+        loading,
         quillTextEditorDataEdit,
         inputChangedHandlerEdit,
         configsEdit,

@@ -23,10 +23,12 @@
         "classnames": "^2.2.6",
         "cross-env": "^5.2.0",
         "dateformat": "^3.0.3",
+        "env-cmd": "^10.0.1",
         "jwt-decode": "^2.2.0",
         "lint-staged": "^9.4.3",
         "pretty-quick": "^2.0.1",
         "prop-types": "^15.7.2",
+        "quill-image-upload": "^0.1.3",
         "react": "^16.10.2",
         "react-dom": "^16.10.2",
         "react-loadable": "^5.5.0",
@@ -40,13 +42,16 @@
         "uuid": "^3.3.3"
     },
     "scripts": {
-        "clean": "rm -rf node_modules && npm install && yarn start",
         "server": "yarn build && node server.js",
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
+        "start:test": "env-cmd  -e test -r ./async-rc.js react-scripts start",
+        "start": "env-cmd -e dev -r ./.cmdrc.json react-scripts start",
+        "build": "env-cmd ./.env.development react-scripts build",
+        "start:prod": "env-cmd ./.env.production react-scripts start",
+        "build:prod": "env-cmd ./.env.production react-scripts build",
+        "test": "env-cmd ./.env.development react-scripts test",
         "eject": "react-scripts eject",
-        "lint": "tsc --noEmit && eslint '*.{js,ts,tsx,jsx}' --quiet --fix"
+        "lint": "tsc --noEmit && eslint '*.{js,ts,tsx,jsx}' --quiet --fix",
+        "clean": "rm -rf node_modules && yarn install && yarn start:dev"
     },
     "husky": {
         "hooks": {

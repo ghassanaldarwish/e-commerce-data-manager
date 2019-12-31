@@ -9,6 +9,7 @@ import AddProductForm from './AddProductForm/AddProductForm';
 import ProductServices, { Actions } from './Products.services';
 import EditProductForm from './EditProductForm/EditProductForm';
 import AlertsDialogModal from '../../components/AlertsDialogModal/AlertsDialogModal';
+import Spinner from '../../components/Spinner/Spinner';
 
 interface Data {
     _id: string;
@@ -20,6 +21,7 @@ interface Data {
 
 const ProductsContainer = () => {
     const {
+        loading,
         quillTextEditorDataEdit,
         inputChangedHandlerEdit,
         configsEdit,
@@ -56,8 +58,8 @@ const ProductsContainer = () => {
                 </Typography>
                 <FabButtonAddIcon clickedHandler={handleClickOpen} />
             </Container>
+            {loading ? <Spinner /> : <StickyHeadTable getProductId={getProductId} rowsData={getProductsShort} />}
 
-            <StickyHeadTable getProductId={getProductId} rowsData={getProductsShort} />
             <EditProductForm
                 configs={configsEdit}
                 errors={errors}

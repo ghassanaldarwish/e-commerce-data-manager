@@ -3,6 +3,7 @@ import FullScreenModalComponent from '../../../components/FullScreenModal/FullSc
 import InputField from '../../../components/InputField/InputField';
 import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs';
 import ProductServices from '../Products.services';
+import './AddProductForm.css';
 const AddProductForm = ({
     handleClose,
     open,
@@ -15,18 +16,24 @@ const AddProductForm = ({
 }) => {
     const renderErrorMessage = () => {
         return (
-            <div id="test">
+            <div id="test" className="RenderErrorMessage">
                 <div>
-                    Submit data Fail:
+                    Submit data Fail =>
                     {errors.errors.statusText}
-                    Status code
+                    <br />
+                    Status code =>
                     {errors.errors.statusCode}
+                    <br />
+                    ErrorMessage => {errors.errors.errorMessage}
                 </div>
                 <div>
                     {' '}
-                    Error creator: {errors.errors.createdBy}
-                    ,Time stamp =>
-                    {errors.errors.timestamp}, Path =>
+                    Error creator >> {errors.errors.createdBy}
+                    <br />
+                    Time stamp =>
+                    {errors.errors.timestamp}
+                    <br />
+                    Path =>
                     {errors.errors.path}.{' '}
                 </div>
             </div>

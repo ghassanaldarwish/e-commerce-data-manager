@@ -69,4 +69,5 @@ firebase.json
 #package-lock.json
 package-lock.json
 
-
+#.env-cmdrc
+.env-cmdrc

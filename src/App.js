@@ -8,6 +8,7 @@ import ErrorBound from './errorBounder/errorBounder';
 
 export default () => {
     const { values } = AppServices();
+
     return (
         <ErrorBound>
             <Switch>
@@ -33,26 +34,5 @@ export default () => {
                 )}
             </Switch>
         </ErrorBound>
-
-        // <Router basename={process.env.REACT_APP_BASENAME || ''}>
-        // <div>
-        //     {routes.map((route, index) => {
-        //         return (
-        //             <Route
-        //                 key={index}
-        //                 path={route.path}
-        //                 exact={route.exact}
-        //                 component={props => {
-        //                     return (
-        //                         <route.layout {...props}>
-        //                             <route.component {...props} />
-        //                         </route.layout>
-        //                     );
-        //                 }}
-        //             />
-        //         );
-        //     })}
-        // </div>
-        // </Router>
     );
 };
