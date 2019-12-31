@@ -1,3 +1,197 @@
+export const EditProductForm = {
+    title: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'roduct Title',
+        },
+        value: '',
+        validation: {
+            required: true,
+        },
+        valid: false,
+        touched: false,
+    },
+    subTitle: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product Sub Title',
+        },
+        value: '',
+        validation: {
+            required: true,
+        },
+        valid: false,
+        touched: false,
+    },
+    brand: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product Brand',
+        },
+        value: '',
+        validation: {
+            required: true,
+        },
+        valid: false,
+        touched: false,
+    },
+    price: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product Price',
+        },
+        value: '',
+        validation: {
+            required: true,
+        },
+        valid: false,
+        touched: false,
+    },
+    image: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product Image',
+        },
+        value: '',
+        validation: {
+            required: true,
+        },
+        valid: false,
+        touched: false,
+    },
+    link: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product Link',
+        },
+        value: '',
+        validation: {
+            required: true,
+        },
+        valid: false,
+        touched: false,
+    },
+    description: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product description',
+        },
+        value: '',
+        validation: {
+            required: true,
+        },
+        valid: false,
+        touched: false,
+    },
+    productImage1: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product Image 1',
+        },
+        value: '',
+        validation: {
+            required: false,
+        },
+        valid: false,
+        touched: false,
+    },
+    productImage2: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product Image 2',
+        },
+        value: '',
+        validation: {
+            required: false,
+        },
+        valid: false,
+        touched: false,
+    },
+    productImage3: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product Image 3',
+        },
+        value: '',
+        validation: {
+            required: false,
+        },
+        valid: false,
+        touched: false,
+    },
+    peopleImage1: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product People 1',
+        },
+        value: '',
+        validation: {
+            required: false,
+        },
+        valid: false,
+        touched: false,
+    },
+    peopleImage2: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product People 2',
+        },
+        value: '',
+        validation: {
+            required: false,
+        },
+        valid: false,
+        touched: false,
+    },
+    peopleImage3: {
+        elementType: 'input',
+        elementConfig: {
+            type: 'text',
+            label: 'Product People 3',
+        },
+        value: '',
+        validation: {
+            required: false,
+        },
+        valid: false,
+        touched: false,
+    },
+    productReview: {
+        elementType: 'quill',
+        elementConfig: {
+            type: 'text',
+            label: 'product Review',
+        },
+        value: null,
+        validation: {
+            required: true,
+        },
+        valid: false,
+        touched: false,
+    },
+    submit: {
+        elementType: 'button',
+        elementConfig: {
+            type: 'submit',
+            label: 'Submit Data',
+        },
+        valid: false,
+        touched: false,
+    },
+};
+
 export const addProductForm = {
     title: {
         elementType: 'input',

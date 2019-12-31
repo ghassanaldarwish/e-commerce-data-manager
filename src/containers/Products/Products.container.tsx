@@ -20,6 +20,18 @@ interface Data {
 
 const ProductsContainer = () => {
     const {
+        quillTextEditorDataEdit,
+        inputChangedHandlerEdit,
+        configsEdit,
+        onSubmitProductEditHandler,
+        configs,
+        errors,
+        quillTextEditorData,
+        inputChangedHandler,
+        onSubmitProductCreatedHandler,
+        slugifyUrlPath,
+        handleCloseEdit,
+        openEdit,
         getProductId,
         getProductsShort,
         open,
@@ -29,15 +41,8 @@ const ProductsContainer = () => {
         product,
         handleCloseAlertsDialogModal,
         onDeleteButtonAlertsDialogModal,
-        action,
     } = ProductServices();
-    const renderFormModal = () => {
-        return action === Actions.Edit ? (
-            <EditProductForm handleClose={handleClose} open={open} />
-        ) : (
-            <AddProductForm handleClose={handleClose} open={open} />
-        );
-    };
+
     return (
         <React.Fragment>
             <CssBaseline />
@@ -53,7 +58,27 @@ const ProductsContainer = () => {
             </Container>
 
             <StickyHeadTable getProductId={getProductId} rowsData={getProductsShort} />
-            {renderFormModal()}
+            <EditProductForm
+                configs={configsEdit}
+                errors={errors}
+                quillTextEditorData={quillTextEditorDataEdit}
+                inputChangedHandler={inputChangedHandlerEdit}
+                onSubmitProductHandler={onSubmitProductEditHandler}
+                slugifyUrlPath={slugifyUrlPath}
+                handleClose={handleCloseEdit}
+                open={openEdit}
+            />
+
+            <AddProductForm
+                configs={configs}
+                errors={errors}
+                quillTextEditorData={quillTextEditorData}
+                inputChangedHandler={inputChangedHandler}
+                onSubmitProductHandler={onSubmitProductCreatedHandler}
+                slugifyUrlPath={slugifyUrlPath}
+                handleClose={handleClose}
+                open={open}
+            />
             <AlertsDialogModal
                 openAlertsDialogModal={openAlertsDialogModal}
                 handleCloseAlertsDialogModal={handleCloseAlertsDialogModal}

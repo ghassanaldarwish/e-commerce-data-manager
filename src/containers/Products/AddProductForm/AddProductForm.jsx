@@ -3,15 +3,16 @@ import FullScreenModalComponent from '../../../components/FullScreenModal/FullSc
 import InputField from '../../../components/InputField/InputField';
 import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs';
 import ProductServices from '../Products.services';
-const AddProductForm = ({ handleClose, open }) => {
-    const {
-        configs,
-        errors,
-        quillTextEditorData,
-        inputChangedHandler,
-        onSubmitProductCreatedHandler,
-        slugifyUrlPath,
-    } = ProductServices();
+const AddProductForm = ({
+    handleClose,
+    open,
+    configs,
+    errors,
+    quillTextEditorData,
+    inputChangedHandler,
+    onSubmitProductHandler,
+    slugifyUrlPath,
+}) => {
     const renderErrorMessage = () => {
         return (
             <div id="test">
@@ -35,7 +36,7 @@ const AddProductForm = ({ handleClose, open }) => {
         <FullScreenModalComponent handleClose={handleClose} open={open}>
             {!!errors && renderErrorMessage()}
             <Breadcrumbs items={slugifyUrlPath} />
-            <form onSubmit={onSubmitProductCreatedHandler}>
+            <form onSubmit={onSubmitProductHandler}>
                 {Object.keys(configs).map((config, index) => {
                     let error;
 

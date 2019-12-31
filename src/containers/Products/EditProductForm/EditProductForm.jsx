@@ -2,16 +2,16 @@ import React from 'react';
 import FullScreenModalComponent from '../../../components/FullScreenModal/FullScreenModal.component';
 import InputField from '../../../components/InputField/InputField';
 import Breadcrumbs from '../../../components/Breadcrumbs/Breadcrumbs';
-import ProductServices from '../Products.services';
-const EditProductForm = ({ handleClose, open }) => {
-    const {
-        configs,
-        errors,
-        quillTextEditorData,
-        inputChangedHandler,
-        onSubmitProductEditHandler,
-        slugifyUrlPath,
-    } = ProductServices();
+const EditProductForm = ({
+    handleClose,
+    open,
+    configs,
+    errors,
+    quillTextEditorData,
+    inputChangedHandler,
+    onSubmitProductHandler,
+    slugifyUrlPath,
+}) => {
     const renderErrorMessage = () => {
         return (
             <div id="test">
@@ -35,7 +35,7 @@ const EditProductForm = ({ handleClose, open }) => {
         <FullScreenModalComponent handleClose={handleClose} open={open}>
             {!!errors && renderErrorMessage()}
             <Breadcrumbs items={slugifyUrlPath} />
-            <form onSubmit={onSubmitProductEditHandler}>
+            <form onSubmit={onSubmitProductHandler}>
                 {Object.keys(configs).map((config, index) => {
                     let error;
 

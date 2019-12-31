@@ -1,19 +1,22 @@
 import { useState, useEffect } from 'react';
-import { addProductForm, prodectDataProvider } from './Products.configs';
+import { addProductForm, EditProductForm, prodectDataProvider } from './Products.configs';
 import Axios from 'axios';
 export enum Actions {
     Edit = 'edit',
 }
 const ProductServices = () => {
     const [configs, setConfigs] = useState(addProductForm as any);
+    const [configsEdit, setConfigsEdit] = useState(EditProductForm as any);
     const [open, setOpen] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
     const [products, setProducts] = useState();
-    const [action, setAction] = useState();
     const [product, setProduct] = useState();
     const [errors, setErrors] = useState();
     const [openAlertsDialogModal, setOpenAlertsDialogModal] = useState(false);
     const setProductLocally = (id: string) => {
-        setProduct(products.find((product: any) => product._id === id));
+        const setProd = products.find((product: any) => product._id === id);
+        setProduct(setProd);
+        return setProd;
     };
     const handleClickOpenAlertsDialogModal = (id: string) => {
         setProductLocally(id);
@@ -39,23 +42,7 @@ const ProductServices = () => {
         }
     };
 
-    const handleClickOpen = (action: string, id: string) => {
-        setAction(action);
-        console.log('clicked');
-        if (action === 'edit') {
-            setProductLocally(id);
-            if (!!product) {
-                console.log('product==>', product);
-                const copyConfigs = { ...configs };
-
-                Object.keys(product).map((prod: any) => {
-                    copyConfigs[prod].value = product[prod];
-                });
-                console.log('  copyConfigs[prod].value = product[prod]==>', copyConfigs);
-                //  setConfigs(copyConfigs)
-            }
-            return setOpen(true);
-        }
+    const handleClickOpen = () => {
         setOpen(true);
     };
 
@@ -63,12 +50,37 @@ const ProductServices = () => {
         setOpen(false);
     };
 
+    const handleClickOpenEdit = async (id: string) => {
+        const currentProduct: any = await findProductById(id);
+        console.log('handleClickOpenEdit', currentProduct);
+        if (!!currentProduct) {
+            setProduct(currentProduct);
+            const copyConfigsEdit = { ...configsEdit };
+
+            Object.keys(copyConfigsEdit).map((prod: any) => {
+                if (prod === 'productReview') {
+                    copyConfigsEdit[prod].value = currentProduct[prod].content;
+                } else {
+                    copyConfigsEdit[prod].value = currentProduct[prod];
+                }
+            });
+            setConfigsEdit(copyConfigsEdit);
+
+            setOpenEdit(true);
+        }
+    };
+
+    const handleCloseEdit = () => {
+        setOpenEdit(false);
+    };
+
     const findProductById = async (id: string) => {
         console.log('findProductById ==>', id);
         try {
             const productData = await Axios(`/api/v1/products/${id}`);
-            console.log('product ==>', productData);
+            console.log('findProductById ==>', productData.data);
             setProduct(productData.data);
+            return productData.data;
         } catch (ex) {
             errorsHandler(ex);
         }
@@ -93,7 +105,7 @@ const ProductServices = () => {
             // case 'edit':
             //     return findProductById(id)
             case 'edit':
-                return handleClickOpen(action, id);
+                return handleClickOpenEdit(id);
             default:
                 return console.log('getProductId => ', action, id);
         }
@@ -109,9 +121,22 @@ const ProductServices = () => {
         setConfigs({ ...configs, productReview: { ...configs.productReview, value: data.ops } });
         localStorage.setItem('productReview', JSON.stringify(data.ops));
     };
+
+    const quillTextEditorDataEdit = (data: any) => {
+        setConfigsEdit({ ...configsEdit, productReview: { ...configsEdit.productReview, value: data.ops } });
+        setProduct({ ...product, productReview: { ...product.productReview, content: data.ops } });
+        console.log('quillTextEditorDataEdit=>configsEdit ==>', configsEdit);
+    };
     const inputChangedHandler = (event: any, fieldKey: any) => {
         setConfigs({ ...configs, [fieldKey]: { ...configs[fieldKey], value: event.target.value } });
         localStorage.setItem([fieldKey] as any, JSON.stringify(event.target.value));
+    };
+
+    const inputChangedHandlerEdit = (event: any, fieldKey: any) => {
+        setConfigsEdit({ ...configsEdit, [fieldKey]: { ...configsEdit[fieldKey], value: event.target.value } });
+        setProduct({ ...product, [fieldKey]: event.target.value });
+
+        console.log('inputChangedHandlerEdit', product);
     };
 
     const findProducts = async () => {
@@ -135,19 +160,20 @@ const ProductServices = () => {
         try {
             const product = await Axios.post('/api/v1/products/', prodectData);
             handleClose();
-            const newProducts = products.map((i: any) => i).push(product);
-            setProducts(newProducts);
+            // const newProducts = products.map((i: any) => i).push(product);
+            // setProducts(newProducts);
             console.log('product ==>', products);
         } catch (ex) {
             errorsHandler(ex);
         }
     };
 
-    const onSubmitProductEditHandler = async (e: any) => {
+    const onSubmitProductEditHandler = async (e: any, id: string) => {
         e.preventDefault();
-
         try {
-            console.log('product ==>', products);
+            const updateProduct: any = await Axios.put('/api/v1/products', product);
+            console.log('onSubmitProductEditHandler ==>', updateProduct);
+            handleClose();
         } catch (ex) {
             errorsHandler(ex);
         }
@@ -169,7 +195,11 @@ const ProductServices = () => {
         [];
 
     return {
-        action,
+        quillTextEditorDataEdit,
+        inputChangedHandlerEdit,
+        configsEdit,
+        handleCloseEdit,
+        openEdit,
         product,
         onDeleteButtonAlertsDialogModal,
         openAlertsDialogModal,
