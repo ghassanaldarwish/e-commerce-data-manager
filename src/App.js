@@ -5,7 +5,7 @@ import routes from './routes';
 import NavbarDrawer from './navbar/Navbar';
 import AppServices from './App.services';
 import ErrorBound from './errorBounder/errorBounder';
-
+import './App.css';
 export default () => {
     const { values } = AppServices();
 
@@ -14,7 +14,7 @@ export default () => {
             <Switch>
                 {values.isSignIn && values.admin ? (
                     <NavbarDrawer>
-                        <div>
+                        <div className="Pages">
                             {routes.map((route, index) => {
                                 return (
                                     <Route
