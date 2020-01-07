@@ -13,6 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import './StickyHeadTable.css';
 import { IconButton } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 interface Column {
     // id: 'name' | 'code' | 'population' | 'size' | 'density';
@@ -84,9 +85,11 @@ export default function StickyHeadTable(props: any) {
                 <IconButton onClick={() => getProductId(id, 'delete')} aria-label="delete" color="secondary">
                     <DeleteIcon />
                 </IconButton>
-                <IconButton onClick={() => getProductId(id, 'show')} aria-label="show">
-                    <VisibilityIcon />
-                </IconButton>
+                <Link to={'/view_item/' + id}>
+                    <IconButton>
+                        <VisibilityIcon />
+                    </IconButton>
+                </Link>
             </div>
         );
     };

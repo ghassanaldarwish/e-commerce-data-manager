@@ -123,6 +123,20 @@ export const proteinOptions = [
         type: Type.Link,
         path: '/supplements/protein/casein_protein',
     },
+    {
+        key: uuid(),
+        title: 'mass gainers',
+        affiliate: true,
+        type: Type.Link,
+        path: '/supplements/protein/mass_gainers',
+    },
+    {
+        key: uuid(),
+        title: 'plant protein',
+        affiliate: true,
+        type: Type.Link,
+        path: '/supplements/protein/plant_protein',
+    },
 ];
 
 export const performanceOptions = [
@@ -139,6 +153,75 @@ export const performanceOptions = [
         affiliate: true,
         type: Type.Link,
         path: '/supplements/performance/post_workout_recovery',
+    },
+    {
+        key: uuid(),
+        title: 'energy endurance',
+        affiliate: true,
+        type: Type.Link,
+        path: '/supplements/performance/energy_endurance',
+    },
+    {
+        key: uuid(),
+        title: 'creatine',
+        affiliate: true,
+        type: Type.Link,
+        path: '/supplements/performance/creatine',
+    },
+    {
+        key: uuid(),
+        title: 'amino & bcaa',
+        affiliate: true,
+        type: Type.Link,
+        path: '/supplements/performance/amino_and_bcaa',
+    },
+];
+
+export const weightManagementOptions = [
+    {
+        key: uuid(),
+        title: 'fat burners',
+        affiliate: true,
+        type: Type.Link,
+        path: '/supplements/weight_management/fat_burners',
+    },
+    {
+        key: uuid(),
+        title: 'l-carnitine, keto & cla',
+        affiliate: true,
+        type: Type.Link,
+        path: '/supplements/weight_management/l-carnitine_keto_and_cla',
+    },
+    {
+        key: uuid(),
+        title: 'low carb protein',
+        affiliate: true,
+        type: Type.Link,
+        path: '/supplements/weight_management/low_carb_protein',
+    },
+];
+
+export const vitaminsAndHealthOptions = [
+    {
+        key: uuid(),
+        title: 'multivitamins',
+        affiliate: true,
+        type: Type.Link,
+        path: '/supplements/vitamins_and_health/multivitamins',
+    },
+    {
+        key: uuid(),
+        title: 'fish oil & omegas',
+        affiliate: true,
+        type: Type.Link,
+        path: '/supplements/vitamins_and_health/fish_oil_and_omegas',
+    },
+    {
+        key: uuid(),
+        title: 'greens food',
+        affiliate: true,
+        type: Type.Link,
+        path: '/supplements/vitamins_and_health/greens_food',
     },
 ];
 
@@ -158,6 +241,22 @@ export const supplementsOptions = [
         type: Type.Collapse,
         path: '/supplements/performance',
         options: performanceOptions,
+    },
+    {
+        key: uuid(),
+        title: 'weight management',
+        affiliate: true,
+        type: Type.Collapse,
+        path: '/supplements/weight_management',
+        options: weightManagementOptions,
+    },
+    {
+        key: uuid(),
+        title: 'vitamins & health',
+        affiliate: true,
+        type: Type.Collapse,
+        path: '/supplements/vitamins_and_health',
+        options: vitaminsAndHealthOptions,
     },
 ];
 
@@ -293,7 +392,36 @@ export const mensAccessoriesOptions = [
     },
 ];
 
-export const mensSportShoesOptions = [];
+export const mensSportShoesOptions = [
+    {
+        key: uuid(),
+        title: 'running',
+        affiliate: true,
+        type: Type.Link,
+        path: '/mens/sport_shoes/running',
+    },
+    {
+        key: uuid(),
+        title: 'fitness & body building',
+        affiliate: true,
+        type: Type.Link,
+        path: '/mens/sport_shoes/fitness_and_body_building',
+    },
+    {
+        key: uuid(),
+        title: 'long distance running',
+        affiliate: true,
+        type: Type.Link,
+        path: '/mens/sport_shoes/long_distance_running',
+    },
+    {
+        key: uuid(),
+        title: 'light weight',
+        affiliate: true,
+        type: Type.Link,
+        path: '/mens/sport_shoes/light weight',
+    },
+];
 
 export const mensOptions = [
     {
@@ -437,7 +565,36 @@ export const womensAccessoriesOptions = [
         path: '/womens/accessories/wallets_and_card_cases',
     },
 ];
-export const womensSportShoesOptions = [];
+export const womensSportShoesOptions = [
+    {
+        key: uuid(),
+        title: 'running',
+        affiliate: true,
+        type: Type.Link,
+        path: '/womens/sport_shoes/running',
+    },
+    {
+        key: uuid(),
+        title: 'fitness & body building',
+        affiliate: true,
+        type: Type.Link,
+        path: '/womens/sport_shoes/fitness_and_body_building',
+    },
+    {
+        key: uuid(),
+        title: 'long distance running',
+        affiliate: true,
+        type: Type.Link,
+        path: '/womens/sport_shoes/long_distance_running',
+    },
+    {
+        key: uuid(),
+        title: 'light weight',
+        affiliate: true,
+        type: Type.Link,
+        path: '/womens/sport_shoes/light weight',
+    },
+];
 
 export const womensOptions = [
     {

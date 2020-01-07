@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ImageUpload } from 'quill-image-upload';
 import ReactQuill, { Quill } from 'react-quill';
 import './InputField.css';
-Quill.register('modules/imageUpload', ImageUpload);
+//Quill.register('modules/imageUpload', ImageUpload);
 export class QuillTextEditor extends Component {
     constructor(props) {
         super(props);
@@ -36,27 +36,6 @@ export class QuillTextEditor extends Component {
 }
 
 const modules = {
-    imageUpload: {
-        url: 'http://localhost:7000/3/image', // server url. If the url is empty then the base64 returns
-        method: 'POST', // change query method, default 'POST'
-        name: 'image', // custom form name
-        withCredentials: false, // withCredentials
-
-        // personalize successful callback and call next function to insert new url to the editor
-        callbackOK: (serverResponse, next) => {
-            next(serverResponse.data.link);
-        },
-        // personalize failed callback
-        callbackKO: serverError => {
-            alert(serverError);
-        },
-        // optional
-        // add callback when a image have been chosen
-        checkBeforeSend: (file, next) => {
-            console.log(file);
-            next(file); // go back to component and send to the server
-        },
-    },
     toolbar: [
         [{ header: '1' }, { header: '2' }, { font: [] }],
         [{ header: [1, 2, 3, 4, 5, 6, false] }],

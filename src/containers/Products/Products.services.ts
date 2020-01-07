@@ -9,10 +9,11 @@ const ProductServices = () => {
     const [configsEdit, setConfigsEdit] = useState(EditProductForm as any);
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-
     const [openEdit, setOpenEdit] = useState(false);
     const [products, setProducts] = useState();
     const [product, setProduct] = useState();
+    const [productView, setProductView] = useState();
+
     const [errors, setErrors] = useState();
     const [openAlertsDialogModal, setOpenAlertsDialogModal] = useState(false);
     const setProductLocally = (id: string) => {
@@ -91,6 +92,20 @@ const ProductServices = () => {
         }
     };
 
+    const findProductViewById = async (id: string) => {
+        console.log('findProductById ==>', id);
+        setLoading(true);
+        try {
+            const productViewData = await Axios(`/api/v1/products/view/${id}`);
+            console.log('findProductById ==>', productViewData.data);
+            setProductView(productViewData.data);
+            setLoading(false);
+            return productViewData.data;
+        } catch (ex) {
+            errorsHandler(ex);
+        }
+    };
+
     const deleteProductById = async (id: string) => {
         console.log('deleteProductById');
         setLoading(true);
@@ -125,6 +140,7 @@ const ProductServices = () => {
     };
 
     const quillTextEditorData = (data: any) => {
+        console.log('quillTextEditorData ==>', data);
         setConfigs({ ...configs, productReview: { ...configs.productReview, value: data.ops } });
         localStorage.setItem('productReview', JSON.stringify(data.ops));
     };
@@ -207,6 +223,8 @@ const ProductServices = () => {
         [];
 
     return {
+        findProductViewById,
+        productView,
         loading,
         quillTextEditorDataEdit,
         inputChangedHandlerEdit,

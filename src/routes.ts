@@ -1,5 +1,6 @@
 import Products from './containers/Products/Products.container';
 import { navbarConfig } from './navbar/navbarPrototypes';
+import ViewProductContainer from './containers/ViewProduct/ViewProduct.container';
 
 export interface Route {
     path: string;
@@ -45,6 +46,14 @@ const navbar = (navbar: any) => {
     }
 };
 
-const Routes = navbar(navbarConfig);
+const Routes = [
+    {
+        path: '/view_item/:id',
+        exact: true,
+
+        component: ViewProductContainer,
+    },
+    ...navbar(navbarConfig),
+];
 
 export default Routes;
