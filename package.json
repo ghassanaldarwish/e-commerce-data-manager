@@ -45,7 +45,7 @@
         "server": "yarn build && node server.js",
         "start:test": "env-cmd  -e test -r ./async-rc.js react-scripts start",
         "start": "env-cmd -e dev -r ./.cmdrc.json react-scripts start",
-        "build": "env-cmd ./.env.development react-scripts build",
+        "build": "env-cmd -e dev -r ./.cmdrc.json react-scripts build",
         "start:prod": "env-cmd ./.env.production react-scripts start",
         "build:prod": "env-cmd ./.env.production react-scripts build",
         "test": "env-cmd ./.env.development react-scripts test",

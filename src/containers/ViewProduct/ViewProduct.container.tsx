@@ -38,7 +38,12 @@ const ViewProductContainer = (props: any) => {
         console.log('ViewProductContainer', productView);
     }
 
-    return <div>ViewProductContainer: {props.match.params.id}</div>;
+    return (
+        <div
+            className="content"
+            dangerouslySetInnerHTML={{ __html: productView && productView.productReview.content }}
+        ></div>
+    );
 };
 
 export default withRouter(ViewProductContainer);
