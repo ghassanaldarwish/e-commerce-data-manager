@@ -171,6 +171,22 @@ const ProductServices = () => {
             const product = await Axios.post('/api/v1/products/', prodectData);
             handleClose();
             setLoading(false);
+            /**
+          *    localStorage.removeItem('title')
+localStorage.removeItem('subTitle')
+localStorage.removeItem('brand')
+localStorage.removeItem('price')
+localStorage.removeItem('image')
+localStorage.removeItem('link')
+localStorage.removeItem('description')
+localStorage.removeItem('productImage1')
+localStorage.removeItem('productImage2')
+localStorage.removeItem('productImage3')
+localStorage.removeItem('PeopleImage1')
+localStorage.removeItem('PeopleImage2')
+localStorage.removeItem('PeopleImage3')
+localStorage.removeItem('productReview')
+          */
             // const newProducts = products.map((i: any) => i).push(product);
             // setProducts(newProducts);
             console.log('product ==>', products);
@@ -183,7 +199,7 @@ const ProductServices = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const updateProduct: any = await Axios.put('/api/v1/products', product);
+            const updateProduct: any = await Axios.put('http://localhost:7000/api/v1/products', product);
             console.log('onSubmitProductEditHandler ==>', updateProduct);
             setLoading(false);
             handleCloseEdit();
